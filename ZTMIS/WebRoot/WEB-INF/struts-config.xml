@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.2//EN" "http://struts.apache.org/dtds/struts-config_1_2.dtd">
+
+<struts-config>
+	<data-sources />
+	<form-beans>
+		<form-bean name="testForm" type="test.struts.form.TestForm" />
+		<form-bean name="addFAQForm" type="struts.form.AddFAQForm" />
+		<form-bean name="chooseCourseForm" type="struts.form.ChooseCourseForm" />
+		<form-bean name="CourseForm" type="course.CourseForm"></form-bean>
+		<form-bean name="faqForm" type="struts.form.FaqForm" />
+		<form-bean name="showCourseForm" type="struts.form.ShowCourseForm" />
+		<form-bean name="manageForm" type="struts.form.admin.ManageForm" />
+		<form-bean name="teacherForm" type="struts.form.TeacherForm" />
+    <form-bean name="loginForm" type="struts.form.LoginForm" />
+
+	</form-beans>
+
+	<global-exceptions />
+	<global-forwards>
+		<forward name="requireLogon" path="/logon"></forward>
+		<forward name="error" path="/error.jsp"></forward>
+	</global-forwards>
+	<action-mappings>
+		<action attribute="testForm" input="/test/test.jsp" name="testForm"
+			path="/test" scope="request" type="struts.action.TestAction">
+			<forward name="testSuccess" path="/test/success.jsp" />
+			<forward name="testFailure" path="/test/failure.jsp" />
+		</action>
+		<action
+      attribute="addFAQForm"
+      input="/admin/addFAQ.jsp"
+      name="addFAQForm"
+      path="/admin/addFAQ"
+      scope="request"
+      type="struts.action.admin.AddFAQAction">
+      <forward name="success" path="/faqAction.do?method=viewFaqList" />
+    </action>
+		<action attribute="chooseCourseForm" input="/course/chooseCourse.jsp"
+			name="chooseCourseForm" path="/chooseCourse" scope="request"
+			type="struts.action.ChooseCourseAction">
+			<forward name="fail" path="/course/failure.jsp"
+				contextRelative="true" />
+			<forward name="succeed" path="/course/success.jsp"
+				contextRelative="true" />
+		</action>
+		<action path="/admin/viewFAQ" type="struts.action.admin.ViewFAQAction">
+			<forward name="success" path="/admin/viewFAQ.jsp" />
+		</action>
+		<action path="/showFAQ" type="struts.action.ShowFAQAction">
+			<forward name="success" path="/showFAQ.jsp" />
+		</action>
+		<action path="/viewselection" type="struts.action.ViewselectionAction">
+			<forward name="viewselection" path="/viewselection.jsp" />
+		</action>
+		<action path="/deleteFAQ" type="struts.action.admin.DeleteFAQAction" />
+
+		<action attribute="CourseForm" input="/course/addCourse.jsp"
+			name="CourseForm" parameter="method" path="/addCourseAction" scope="request"
+			type="course.CourseAction">
+			<forward name="success" path="/course/success.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+
+		<action input="/course/to.jsp" parameter="method" path="/courseAction"
+			scope="request" type="course.CourseAction">
+			<forward name="courseList" path="/course/courseList.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+
+		<action input="/course/courseList.jsp" parameter="method" name="CourseForm"
+			path="/deleteCourse" scope="request" type="course.CourseAction">
+			<forward name="success" path="/course/success.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+		<action input="/course/courseList.jsp" parameter="method" name="CourseForm"
+			path="/courseDetail" scope="request" type="course.CourseAction">
+			<forward name="success" path="/course/viewCourse.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+		<action input="/course/courseList.jsp" parameter="method" name="CourseForm"
+			path="/displayCourse" scope="request" type="course.CourseAction">
+			<forward name="updateCourse" path="/course/updateCourse.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+
+		<action input="/course/updateCourse.jsp" parameter="method"
+			name="CourseForm" path="/updateCourse" scope="request" type="course.CourseAction">
+			<forward name="success" path="/course/success.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+		<action parameter="method"
+			 path="/choiceCourse" scope="request" type="course.CourseAction">
+			<forward name="showchoice" path="/course/choiceList.jsp" />
+			<forward name="failure" path="/course/failure.jsp" />
+		</action>
+		
+		
+		<action attribute="faqForm" input="/admin/faqList.jsp" name="faqForm"
+			parameter="method" path="/faqAction" scope="request"
+			type="struts.action.admin.FaqAction">
+			<forward name="displayFaq" path="/admin/updateFaq.jsp" />
+			<forward name="viewFaqList" path="/admin/faqList.jsp"
+				redirect="true" />
+		</action>
+
+		<action input="/admin/faqList.jsp" parameter="method" name="faqForm"
+			path="/displayFaq" scope="request" type="struts.action.admin.FaqAction">
+
+		</action>
+		<action attribute="faqForm" input="/admin/inputFaq.jsp" name="faqForm"
+			parameter="method" path="/addFaq" scope="request"
+			type="struts.action.admin.FaqAction">
+
+			<forward name="failure" path="/error.jsp" />
+		</action>
+
+		<action input="/admin/updateFaq.jsp" parameter="method" name="faqForm"
+			path="/updateFaq" scope="request" type="struts.action.admin.FaqAction">
+			<forward name="viewFaqList" path="/admin/faqList.jsp" />
+		</action>
+		<action attribute="showCourseForm" input="/student.jsp" name="showCourseForm"
+			path="/showCourse" scope="request" type="struts.action.ShowCourseAction">
+			<forward name="showcourse" path="/course/chooseCourse.jsp"
+				contextRelative="true" />
+		</action>
+		<action attribute="manageForm" input="/admin/manage.jsp" name="manageForm"
+			path="/manage" scope="request" type="struts.action.admin.ManageAction" />
+		<action path="/inputFaq" type="struts.action.admin.InputFaqAction">
+			<forward name="success" path="/admin/inputFaq.jsp" />
+		</action>
+		<action attribute="teacherForm" input="/admin/addTeacher.jsp"
+			name="teacherForm" path="/addTeacher" scope="request"
+			type="struts.action.admin.AddTeacherAction">
+			<forward name="success" path="/admin/manage.jsp" />
+		</action>
+    <action
+      attribute="loginForm"
+      input="/login.jsp"
+      name="loginForm"
+      path="/login"
+      scope="request"
+      type="struts.action.LoginAction">
+      <forward name="teacher" path="/teacher.jsp" />
+      <forward name="student" path="/student.jsp" />
+      <forward
+        name="wrongpassword"
+        path="/login.jsp"
+        redirect="true" />
+      <forward name="admin" path="/admin/manage.jsp" />
+      <forward name="failure" path="/login.jsp" />
+    </action>
+    <action
+      attribute="loginForm"
+      name="loginForm"
+      path="/logout"
+      scope="request"
+      type="struts.action.LogoutAction">
+      <forward
+        name="success"
+        path="/login.jsp"
+        redirect="true" />
+    </action>
+	</action-mappings>
+
+	<message-resources parameter="struts.ApplicationResources" />
+</struts-config>
+
